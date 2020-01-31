@@ -16,7 +16,7 @@ namespace ConsoleAdventure.Project
     }
     public void Go(string direction)
     {
-      throw new System.NotImplementedException();
+      //  GameService.Messages.Add(new Message("Which way do you wanna go?"));   
     }
     public void Help()
     {
@@ -48,7 +48,6 @@ namespace ConsoleAdventure.Project
     public void Setup(string playerName)
     {
 
-      Messages.Add($"Welcome to your Adventure {playerName}");
 
 
 

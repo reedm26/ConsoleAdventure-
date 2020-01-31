@@ -9,6 +9,10 @@ namespace ConsoleAdventure.Project.Models
     public string Description { get; set; }
     public List<Item> Items { get; set; }
     public Dictionary<string, IRoom> Exits { get; set; }
+    public void checkRooms()
+    {
+      if
+    }
 
     public Room(string name, string description)
     {
