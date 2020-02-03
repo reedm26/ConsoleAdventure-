@@ -40,6 +40,7 @@ namespace ConsoleAdventure.Project.Controllers
     //NOTE this should print your messages for the game.
     private void Print()
     {
+      Console.Clear();
       foreach (string message in _gameService.Messages)
       {
         Console.WriteLine(message);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using ConsoleAdventure.Project.Interfaces;
 using ConsoleAdventure.Project.Models;
 
@@ -16,7 +17,19 @@ namespace ConsoleAdventure.Project
     }
     public void Go(string direction)
     {
-      //  GameService.Messages.Add(new Message("Which way do you wanna go?"));   
+      if (_game.CurrentRoom.Exits.ContainsKey(direction))
+      {
+        _game.CurrentRoom = _game.CurrentRoom.Exits[direction];
+        GetRoomDescription();
+        return;
+      }
+      Messages.Add("there is no exit");
+      return;
+
+    }
+    public void GetRoomDescription()
+    {
+
     }
     public void Help()
     {
