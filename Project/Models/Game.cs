@@ -19,12 +19,12 @@ namespace ConsoleAdventure.Project.Models
 
       //NOTE This is where i am adding items
       Item Candle = new Item("Candle", "This will make things easier to see.");
-      Item Key = new Item("Key", "This might work work for a door.");
+      Item Key = new Item("Key", "This might work for a door.");
       //NOTE This is where i assign each item to the right Room
       Room1.Items.Add(new Item(Key.Name, Key.Description));
-      Room1.Items.Add(new Item(Candle.Name, Candle.Description));
-      Room2.Items.Add(new Item(Key.Name, Key.Description));
-      Room2.Items.Add(new Item(Candle.Name, Candle.Description));
+      Room1.Items.Add(Candle);
+      Room2.Items.Add(Key);
+      Room2.Items.Add(Candle);
       //NOTE this is where i added all my exits to rooms
       Room1.Exits.Add("north", Room2);
       Room2.Exits.Add("north", Room3);
@@ -39,5 +39,10 @@ namespace ConsoleAdventure.Project.Models
       CurrentRoom = Room1;
 
     }
+    public Game()
+    {
+      Setup();
+    }
+
   }
 }

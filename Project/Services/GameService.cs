@@ -3,7 +3,7 @@ using System;
 using ConsoleAdventure.Project.Interfaces;
 using ConsoleAdventure.Project.Models;
 
-namespace ConsoleAdventure.Project
+namespace ConsoleAdventure.Project.Services
 {
   public class GameService : IGameService
   {
@@ -21,14 +21,14 @@ namespace ConsoleAdventure.Project
       {
         _game.CurrentRoom = _game.CurrentRoom.Exits[direction];
         GetRoomDescription();
+        Look();
         return;
       }
       Messages.Add("there is no exit");
-      return;
-
     }
     public void GetRoomDescription()
     {
+      Messages.Add(_game.CurrentRoom.Description);
 
     }
     public void Help()
@@ -43,7 +43,8 @@ namespace ConsoleAdventure.Project
 
     public void Look()
     {
-      throw new System.NotImplementedException();
+      Messages.Add(_game.CurrentRoom.Description);
+      return;
     }
 
     public void Quit()
@@ -55,7 +56,7 @@ namespace ConsoleAdventure.Project
     ///</summary>
     public void Reset()
     {
-      throw new System.NotImplementedException();
+
     }
 
     public void Setup(string playerName)

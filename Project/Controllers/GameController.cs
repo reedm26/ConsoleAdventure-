@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ConsoleAdventure.Project.Interfaces;
 using ConsoleAdventure.Project.Models;
+using ConsoleAdventure.Project.Services;
 
 namespace ConsoleAdventure.Project.Controllers
 {
@@ -34,6 +35,38 @@ namespace ConsoleAdventure.Project.Controllers
       string option = input.Substring(input.IndexOf(" ") + 1).Trim();
       //NOTE this will take the user input and parse it into a command and option.
       //IE: take silver key => command = "take" option = "silver key"
+      switch (command)
+      {
+        case "go":
+          _gameService.Go(option);
+          break;
+        case "look":
+          _gameService.Look();
+          break;
+        case "help":
+          _gameService.Help();
+          break;
+        case "inventory":
+          _gameService.Inventory();
+          break;
+        case "quit":
+        case "q":
+        case "exit":
+          _running = false;
+          break;
+        case "reset":
+          _gameService.Reset();
+          break;
+        case "take":
+          _gameService.TakeItem(option);
+          break;
+        case "use":
+          _gameService.UseItem(option);
+          break;
+
+
+      }
+      Console.WriteLine("Invalid Input");
 
     }
 

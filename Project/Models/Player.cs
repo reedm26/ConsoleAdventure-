@@ -10,7 +10,7 @@ namespace ConsoleAdventure.Project.Models
     public List<Item> Inventory { get; set; }
     public Player(string name)
     {
-      this.Name = name;
+      Name = name;
 
     }
   }
