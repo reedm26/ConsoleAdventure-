@@ -29,22 +29,51 @@ namespace ConsoleAdventure.Project.Services
     }
     public void GetRoomDescription()
     {
-      System.Console.Clear();
+      // System.Console.Clear();
       Messages.Add($"---- You are in: {_game.CurrentRoom.Name} ----");
       Messages.Add(_game.CurrentRoom.Description);
+      Messages.Add("");
+      Messages.Add("");
     }
     public void Help()
     {
-      GetRoomDescription();
+      System.Console.Clear();
+
+      Messages.Add("");
+      Messages.Add("");
+      Messages.Add("          --Help Guide--");
+      Messages.Add("'go' then insert compass direction -");
+      Messages.Add("'look' to see room description -");
+      Messages.Add("'quit' to exit the game -");
+      Messages.Add("'take' and item name, to grab item -");
+      Messages.Add("");
+      Messages.Add("");
+
     }
 
     public void Inventory()
     {
-      throw new System.NotImplementedException();
+      if (_game.CurrentPlayer.Inventory.Count == 0)
+      {
+        Messages.Add("");
+        Messages.Add("---You dont have any inventory!--- ");
+      }
+      foreach (var item in _game.CurrentPlayer.Inventory)
+      {
+        Messages.Add($"{item.Name}");
+      }
     }
 
     public void Look()
     {
+      GetRoomDescription();
+      Messages.Add("----found items----");
+      Messages.Add("");
+      foreach (var item in _game.CurrentRoom.Items)
+      {
+        Messages.Add($"{item.Name}");
+      }
+
 
     }
 
@@ -67,12 +96,23 @@ namespace ConsoleAdventure.Project.Services
     ///<summary>When taking an item be sure the item is in the current room before adding it to the player inventory, Also don't forget to remove the item from the room it was picked up in</summary>
     public void TakeItem(string itemName)
     {
+
       if (_game.CurrentRoom.Items.Count == 0)
       {
         Messages.Add("There is nothing in here to take...");
       }
-      Messages.Add($"This {itemName} could help us out!");
-      _game.CurrentPlayer.Inventory.AddRange(_game.CurrentRoom.Items);
+      else if (_game.CurrentRoom.Items.Exists(i => i.Name.ToLower() == itemName))
+      {
+
+        var item = _game.CurrentRoom.Items.Find(i => i.Name.ToLower() == itemName);
+        Messages.Add($"This {itemName} could help us out!");
+        _game.CurrentPlayer.Inventory.Add(item);
+        _game.CurrentRoom.Items.Remove(item);
+      }
+      else
+      {
+        Messages.Add("There is no such item");
+      }
     }
     ///<summary>
     ///No need to Pass a room since Items can only be used in the CurrentRoom

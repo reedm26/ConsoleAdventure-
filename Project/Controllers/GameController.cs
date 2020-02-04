@@ -17,22 +17,25 @@ namespace ConsoleAdventure.Project.Controllers
       Console.WriteLine("Lets Start an adventure!");
       Console.WriteLine("What is your name?");
       string name = Console.ReadLine();
+      Console.Clear();
       Console.WriteLine($"Lets start your adventure {name}");
-      _gameService.GetRoomDescription();
+      // _gameService.GetRoomDescription();
 
       while (_running)
       {
         GetUserInput();
         Print();
       }
+      // Console.Clear();
     }
 
 
     //NOTE Gets the user input, calls the appropriate command, and passes on the option if needed.
     public void GetUserInput()
     {
-      Console.WriteLine("--type help to see what room you're in--");
-      Console.WriteLine("What would you like to do?");
+      Console.WriteLine("");
+      Console.WriteLine("--type help for options--");
+      // Console.WriteLine("What would you like to do?");
       string input = Console.ReadLine().ToLower() + " ";
       string command = input.Substring(0, input.IndexOf(" "));
       string option = input.Substring(input.IndexOf(" ") + 1).Trim();
@@ -50,6 +53,7 @@ namespace ConsoleAdventure.Project.Controllers
           _gameService.Help();
           break;
         case "inventory":
+        case "i":
           _gameService.Inventory();
           break;
         case "quit":
