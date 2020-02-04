@@ -7,7 +7,7 @@ namespace ConsoleAdventure.Project.Models
   {
 
     public string Name { get; set; }
-    public List<Item> Inventory { get; set; }
+    public List<Item> Inventory { get; set; } = new List<Item>();
     public Player(string name)
     {
       Name = name;

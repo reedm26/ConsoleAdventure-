@@ -18,7 +18,7 @@ namespace ConsoleAdventure.Project.Models
 
       CurrentRoom = Room1;
 
-
+      //Current player
       Player marcel = new Player("Marcel");
       CurrentPlayer = marcel;
 

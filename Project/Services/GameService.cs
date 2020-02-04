@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System;
 using ConsoleAdventure.Project.Interfaces;
 using ConsoleAdventure.Project.Models;
 
@@ -19,21 +18,24 @@ namespace ConsoleAdventure.Project.Services
     {
       if (_game.CurrentRoom.Exits.ContainsKey(direction))
       {
+        System.Console.Clear();
         _game.CurrentRoom = _game.CurrentRoom.Exits[direction];
         GetRoomDescription();
-        Look();
+        System.Console.WriteLine("You could turn back now...");
         return;
+
       }
-      Messages.Add("there is no exit");
+      Messages.Add("there is no exit here");
     }
     public void GetRoomDescription()
     {
+      System.Console.Clear();
+      Messages.Add($"---- You are in: {_game.CurrentRoom.Name} ----");
       Messages.Add(_game.CurrentRoom.Description);
-
     }
     public void Help()
     {
-      throw new System.NotImplementedException();
+      GetRoomDescription();
     }
 
     public void Inventory()
@@ -43,8 +45,7 @@ namespace ConsoleAdventure.Project.Services
 
     public void Look()
     {
-      Messages.Add(_game.CurrentRoom.Description);
-      return;
+
     }
 
     public void Quit()
@@ -56,20 +57,22 @@ namespace ConsoleAdventure.Project.Services
     ///</summary>
     public void Reset()
     {
-
+      _game.Setup();
     }
 
     public void Setup(string playerName)
     {
-
-
-
-
+      throw new System.NotImplementedException();
     }
     ///<summary>When taking an item be sure the item is in the current room before adding it to the player inventory, Also don't forget to remove the item from the room it was picked up in</summary>
     public void TakeItem(string itemName)
     {
-      throw new System.NotImplementedException();
+      if (_game.CurrentRoom.Items.Count == 0)
+      {
+        Messages.Add("There is nothing in here to take...");
+      }
+      Messages.Add($"This {itemName} could help us out!");
+      _game.CurrentPlayer.Inventory.AddRange(_game.CurrentRoom.Items);
     }
     ///<summary>
     ///No need to Pass a room since Items can only be used in the CurrentRoom

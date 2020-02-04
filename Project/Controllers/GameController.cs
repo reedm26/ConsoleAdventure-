@@ -18,6 +18,8 @@ namespace ConsoleAdventure.Project.Controllers
       Console.WriteLine("What is your name?");
       string name = Console.ReadLine();
       Console.WriteLine($"Lets start your adventure {name}");
+      _gameService.GetRoomDescription();
+
       while (_running)
       {
         GetUserInput();
@@ -29,6 +31,7 @@ namespace ConsoleAdventure.Project.Controllers
     //NOTE Gets the user input, calls the appropriate command, and passes on the option if needed.
     public void GetUserInput()
     {
+      Console.WriteLine("--type help to see what room you're in--");
       Console.WriteLine("What would you like to do?");
       string input = Console.ReadLine().ToLower() + " ";
       string command = input.Substring(0, input.IndexOf(" "));
@@ -63,10 +66,13 @@ namespace ConsoleAdventure.Project.Controllers
         case "use":
           _gameService.UseItem(option);
           break;
+        default:
+          System.Console.WriteLine("Invalid key");
+          break;
 
 
       }
-      Console.WriteLine("Invalid Input");
+
 
     }
 
