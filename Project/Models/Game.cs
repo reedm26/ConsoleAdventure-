@@ -28,10 +28,9 @@ namespace ConsoleAdventure.Project.Models
 
 
       //NOTE This is where i assign each item to the right Room
-      Room1.Items.Add(Key);
       Room1.Items.Add(Candle);
       Room2.Items.Add(Key);
-      Room2.Items.Add(Candle);
+      SecretRoom.Items.Add(Key);
 
 
       //NOTE this is where i added all my exits to rooms
@@ -44,7 +43,17 @@ namespace ConsoleAdventure.Project.Models
       SecretRoom.Exits.Add("west", Room3);
       Room4.Exits.Add("south", Room3);
 
+      //NOTE this is where i have my bool for locked doors
+      Room4.useItem = true;
+      SecretRoom.useItem = true;
 
+      //NOTE where i have to set which room uses the lights and key
+      Room1.Light = Candle;
+      Room1.Locked = Key;
+      Room2.Light = Candle;
+      Room3.Light = Candle;
+      SecretRoom.Light = Candle;
+      Room4.Light = Candle;
     }
     public Game()
     {

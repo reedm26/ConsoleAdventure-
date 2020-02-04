@@ -68,6 +68,17 @@ namespace ConsoleAdventure.Project.Controllers
           _gameService.TakeItem(option);
           break;
         case "use":
+          bool usedItem = _gameService.UseItem(option);
+          if (usedItem)
+          {
+            Console.Clear();
+          }
+          else if (!usedItem)
+          {
+            Console.Clear();
+            Print();
+          }
+          else Run();
           _gameService.UseItem(option);
           break;
         default:

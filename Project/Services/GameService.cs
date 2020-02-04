@@ -16,13 +16,17 @@ namespace ConsoleAdventure.Project.Services
     }
     public void Go(string direction)
     {
-      if (_game.CurrentRoom.Exits.ContainsKey(direction))
+      if (_game.CurrentRoom.Exits.ContainsKey(direction) && !_game.CurrentRoom.useItem)
       {
         System.Console.Clear();
         _game.CurrentRoom = _game.CurrentRoom.Exits[direction];
         GetRoomDescription();
-        System.Console.WriteLine("You could turn back now...");
+        Messages.Add("You could turn back now...");
         return;
+
+      }
+      else if (_game.CurrentRoom.useItem)
+      {
 
       }
       Messages.Add("there is no exit here");
@@ -119,9 +123,27 @@ namespace ConsoleAdventure.Project.Services
     ///Make sure you validate the item is in the room or player inventory before
     ///being able to use the item
     ///</summary>
-    public void UseItem(string itemName)
+    public bool UseItem(string itemName)
     {
-      throw new System.NotImplementedException();
+      if (_game.CurrentPlayer.Inventory.Exists(i => i.Name.ToLower() == itemName) && _game.CurrentRoom.useItem && itemName == _game.CurrentRoom.Locked.Name.ToLower())
+      {
+
+        _game.CurrentRoom.useItem = false;
+        var doorKey = _game.CurrentPlayer.Inventory.Find(i => i.Name == itemName);
+        _game.CurrentPlayer.Inventory.Remove(doorKey);
+        Messages.Add("Come on threw to the other side!");
+      }
+      else if (_game.CurrentPlayer.Inventory.Exists(i => i.Name.ToLower() == itemName) && !_game.CurrentRoom.useItem)
+      {
+        Messages.Add("There might have been something you needed...");
+        return true;
+      }
+      else
+      {
+        Messages.Add("You do not have an item like that.");
+        return true;
+      }
+
     }
   }
 }
